@@ -24,6 +24,8 @@ jobs:
         with:
           repository: 'rev0lgenX/AniLib'
           fetch-depth: 0
+          submodules: recursive
+          token: ${{ secrets.ACCESS_TOKEN }}
         if: github.event.inputs.git-ref == ''
 
       - name: Clone Repository (Custom Ref)
@@ -32,6 +34,8 @@ jobs:
         with:
           repository: 'rev0lgenX/AniLib'
           fetch-depth: 0
+          submodules: recursive
+          token: ${{ secrets.ACCESS_TOKEN }}
           ref: ${{ github.event.inputs.git-ref }}
 
       - name: Setup Java JDK
