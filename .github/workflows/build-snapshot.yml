@@ -72,10 +72,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: L-${{ env.CURRENT_SHA }}
+          tag_name: S-${{ env.CURRENT_SHA }}
           release_name: AniLib Snapshot S-${{ env.CURRENT_SHA }}
           body: >
-            L-${{ env.CURRENT_SHA }}
+            S-${{ env.CURRENT_SHA }}
             Latest commit: https://github.com/rev0lgenX/AniLib/commit/${{ env.CURRENT_SHA }}
           draft: ${{ github.event.inputs.dry-run != '' }}
           prerelease: false
@@ -86,6 +86,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app/build/intermediates/apk/standard/debug/app-standard-debug.apk
-          asset_name: AniLib-Snapshot-L-${{ env.CURRENT_SHA }}.apk
+          asset_path: app/build/outputs/apk/standard/debug/app-standard-debug.apk
+          asset_name: AniLib-Snapshot-S-${{ env.CURRENT_SHA }}.apk
           asset_content_type: application/vnd.android.package-archive
