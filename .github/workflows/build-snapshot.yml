@@ -12,7 +12,7 @@ on:
 
 
   repository_dispatch:
-    types: [build-event]
+    types: [build-snapshot-event]
 
 jobs:
   build:
@@ -26,7 +26,17 @@ jobs:
           fetch-depth: 0
           submodules: recursive
           token: ${{ secrets.ACCESS_TOKEN }}
-        if: github.event.inputs.git-ref == ''
+        if: github.event.inputs.git-ref == '' && github.event.client_payload.ref == ''
+
+      - name: Clone Repository (Custom Ref)
+        uses: actions/checkout@v2
+        if: github.event.client_payload.ref != ''
+        with:
+          repository: 'rev0lgenX/AniLib'
+          fetch-depth: 0
+          submodules: recursive
+          token: ${{ secrets.ACCESS_TOKEN }}
+          ref: ${{ github.event.client_payload.ref }}
 
       - name: Clone Repository (Custom Ref)
         uses: actions/checkout@v2
